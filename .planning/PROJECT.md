@@ -27,19 +27,7 @@ A reliable, feature-complete Rust alternative to Claude Code that stays current 
 
 ### Active
 
-- [ ] Fix known security vulnerability: arbitrary command execution via project-level MCP config (issue #123)
-- [ ] Fix mouse capture breaking native text selection and causing scroll lag (issue #104)
-- [ ] Fix voice / ALSA not connecting; toggle off broken (issue #88)
-- [ ] Fix remote Ollama server not respected (still using localhost) (issue #86)
-- [ ] Fix keyboard shortcut breakage on non-English keyboard layouts (issue #47)
-- [ ] Fix API key paste failure in TUI (issue #76)
-- [ ] Achieve feature parity with Claude Code slash commands (100+ per spec/02_commands.md)
-- [ ] Achieve feature parity with Claude Code tools suite (40+ tools per spec/03_tools.md)
-- [ ] Close TUI/UI rendering and interaction gaps (per spec/04, spec/05, spec/08)
-- [ ] Implement Managed Agents (manager-executor architecture) per plan.md
-- [ ] Support custom OpenAI API URL (issue #106)
-- [ ] Support minimax Authorization header in API (issue #117)
-- [ ] Establish regular upstream sync workflow from kuberwastaken/claurst
+- [ ] Fix welcome screen silent exit: pressing Enter on first-launch welcome page exits claurst silently with no error output
 
 ### Out of Scope
 
@@ -47,6 +35,11 @@ A reliable, feature-complete Rust alternative to Claude Code that stays current 
 - GUI (non-terminal) interface — ratatui TUI is the target
 - Sherpa-ONNX local ASR (issue #114) — deferred; high integration complexity, small audience
 - Kairos mode (issue #103) — deferred; unclear spec, needs separate design
+- Feature parity gap-close — parity is largely achieved; new Claude Code features will be tracked as future milestones
+- Managed Agents (plan.md) — deferred to a future milestone
+- Upstream sync workflow — handled ad-hoc
+- Security hardening (#123, #79, #96) — deferred to a future milestone
+- Bulk bug fixes (#104, #88, #86, #47, #76, #106, #117) — deferred; will surface as future milestones
 
 ## Context
 
@@ -61,15 +54,13 @@ A reliable, feature-complete Rust alternative to Claude Code that stays current 
 
 - **Tech Stack:** Rust only. No new language runtimes. Dependencies must be compatible with workspace resolver v2.
 - **Compatibility:** Must maintain CLI and TUI UX continuity across releases — no breaking changes to settings.json schema without migration.
-- **Security:** Security issues (MCP arbitrary execution #123, permission issues #79, #96) take priority over feature work.
-- **Upstream sync:** Upstream merges must not break the workspace build or feature-gated compilation.
+- **Milestones:** New Claude Code features are discovered by the owner and brought in as new milestones — not continuously tracked.
 
 ## Key Decisions
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Reuse `AgentTool` + `run_query_loop` for Managed Agents | Avoids parallel orchestration infrastructure; manager is just a query loop with a delegation system prompt | — Pending |
-| Interleaved roadmap (bugs + upstream + features in parallel phases) | No single blocker dominates; community gets bug fixes without waiting for feature parity | — Pending |
+| Minimal v1 roadmap (single bug fix phase) | Feature parity is largely achieved; future work arrives as new milestones | — Pending |
 | `spec/` as parity ground truth | Spec was reverse-engineered from the official TypeScript Claude Code; 990 KB coverage across all subsystems | — Pending |
 
 ## Evolution
@@ -90,4 +81,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-05-04 after initialization*
+*Last updated: 2026-05-04 after requirements scoping*
