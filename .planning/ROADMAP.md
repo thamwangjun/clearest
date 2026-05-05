@@ -19,7 +19,10 @@
   1. User presses Enter on the welcome screen and claurst proceeds to the main TUI session instead of exiting
   2. User who encounters the welcome screen for the first time sees no unexpected termination or blank output
   3. Pressing Enter on the welcome screen produces the same result across platforms (macOS, Linux)
-**Plans**: TBD
+**Plans**: 1 plan
+
+Plans:
+- [ ] 01-01-PLAN.md — Fix failing onboarding_defaults_hidden test and add D-06 regression tests (Enter/Esc on Welcome/KeyBindings pages; assert should_quit=false)
 
 ## Progress Table
 
@@ -29,4 +32,4 @@
 
 ---
 *Roadmap defined: 2026-05-04*
-*Last updated: 2026-05-04 after initial creation*
+*Last updated: 2026-05-05 after phase 1 planning*
