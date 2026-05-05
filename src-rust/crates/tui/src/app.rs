@@ -2771,25 +2771,35 @@ impl App {
                 KeyCode::Esc => {
                     self.onboarding_dialog.dismiss();
                     // Persist completion off the event loop so we don't block
-                    // the tokio thread during key handling.
-                    tokio::spawn(async {
-                        if let Ok(mut s) = claurst_core::config::Settings::load().await {
-                            s.has_completed_onboarding = true;
-                            let _ = s.save().await;
-                        }
-                    });
-                }
-                KeyCode::Enter | KeyCode::Right => {
-                    if self.onboarding_dialog.next_page() {
-                        self.onboarding_dialog.dismiss();
-                        // Persist completion off the event loop so we don't block
-                        // the tokio thread during key handling.
+                    // the tokio thread during key handling. Fall back to the
+                    // sync helper when no runtime is present (e.g. unit tests).
+                    if tokio::runtime::Handle::try_current().is_ok() {
                         tokio::spawn(async {
                             if let Ok(mut s) = claurst_core::config::Settings::load().await {
                                 s.has_completed_onboarding = true;
                                 let _ = s.save().await;
                             }
                         });
+                    } else {
+                        let _ = Self::persist_onboarding_complete();
+                    }
+                }
+                KeyCode::Enter | KeyCode::Right => {
+                    if self.onboarding_dialog.next_page() {
+                        self.onboarding_dialog.dismiss();
+                        // Persist completion off the event loop so we don't block
+                        // the tokio thread during key handling. Fall back to the
+                        // sync helper when no runtime is present (e.g. unit tests).
+                        if tokio::runtime::Handle::try_current().is_ok() {
+                            tokio::spawn(async {
+                                if let Ok(mut s) = claurst_core::config::Settings::load().await {
+                                    s.has_completed_onboarding = true;
+                                    let _ = s.save().await;
+                                }
+                            });
+                        } else {
+                            let _ = Self::persist_onboarding_complete();
+                        }
                     }
                 }
                 KeyCode::Left => {
