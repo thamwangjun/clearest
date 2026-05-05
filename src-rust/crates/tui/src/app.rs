@@ -2803,7 +2803,10 @@ impl App {
                     }
                 }
                 KeyCode::Left => {
-                    self.onboarding_dialog.prev_page();
+                    // Guard: no-op on the first page (no page to go back to).
+                    if !self.onboarding_dialog.is_first_page() {
+                        self.onboarding_dialog.prev_page();
+                    }
                 }
                 _ => {}
             }

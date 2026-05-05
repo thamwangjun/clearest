@@ -83,6 +83,12 @@ impl OnboardingDialogState {
     pub fn is_done(&self) -> bool {
         self.page == OnboardingPage::Done
     }
+
+    /// Returns true when the current page is the entry point of the flow,
+    /// i.e. there is no previous page to navigate back to.
+    pub fn is_first_page(&self) -> bool {
+        matches!(self.page, OnboardingPage::ProviderSetup | OnboardingPage::Welcome)
+    }
 }
 
 // ---------------------------------------------------------------------------
