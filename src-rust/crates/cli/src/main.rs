@@ -1432,7 +1432,7 @@ async fn run_interactive(
     // clearly set things up (via /connect or env vars) and don't need onboarding.
     if !has_credentials {
         if !settings.has_completed_onboarding {
-            app.onboarding_dialog.show();
+            app.onboarding_dialog.show_provider_setup();
         } else {
             app.status_message = Some("No provider configured. Run /connect to set one up.".to_string());
         }
