@@ -119,6 +119,10 @@ pub fn render_onboarding_dialog(
 }
 
 fn render_provider_setup_page(frame: &mut Frame, area: Rect) {
+    use crate::overlays::{render_dark_overlay, render_dialog_bg};
+    render_dark_overlay(frame, area);
+    render_dialog_bg(frame, area);
+
     // Theme pink — matches the header and mascot
     let pink = Color::Rgb(233, 30, 99);
     let dim = Color::Rgb(100, 100, 100);
