@@ -22,7 +22,7 @@
 **Plans**: 1 plan
 
 Plans:
-- [ ] 01-01-PLAN.md — Fix failing onboarding_defaults_hidden test and add D-06 regression tests (Enter/Esc on Welcome/KeyBindings pages; assert should_quit=false)
+- [x] 01-01-PLAN.md — Fix failing onboarding_defaults_hidden test and add D-06 regression tests (Enter/Esc on Welcome/KeyBindings pages; assert should_quit=false)
 
 ## Progress Table
 
