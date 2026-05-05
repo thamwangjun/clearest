@@ -2770,6 +2770,8 @@ impl App {
             match key.code {
                 KeyCode::Esc => {
                     self.onboarding_dialog.dismiss();
+                    // Persist completion so the dialog doesn't reappear on next launch.
+                    let _ = Self::persist_onboarding_complete();
                 }
                 KeyCode::Enter | KeyCode::Right => {
                     if self.onboarding_dialog.next_page() {
