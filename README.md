@@ -1,7 +1,7 @@
 <div align="center">
 
-<h1>CLAURST</h1>
-<h3><em>Your Favorite Terminal Coding Agent, now in Rust</em></h3>
+# Clearest
+## *My Favorite Terminal Coding Agent, now in Rust*
 <img src="public/Rustle.png" alt="Rustle the Crab" width="150" />
 
 <p>
@@ -17,19 +17,15 @@
 
 ---
 
-Claurst is an **open-source, multi-provider terminal coding agent** built from the ground up in Rust. It started as a clean-room reimplementation of Claude Code's behavior (from [spec](https://github.com/kuberwastaken/claurst/tree/main/spec)) and has since evolved into an amazing TUI pair programmer with multi-provider support, a rich UI, plugin system, a companion named Rustle, chat forking, memory consolidation, and much more.
-
-It's fast, it's memory-efficient, it's yours to run however you want, and there's no tracking or telemetry.
+Clearest is my own fork of Claurst. It will include bug fixes, upstream Claude Code changes and features.
 
 ---
 
-> [!NOTE]
-> **Recent Updates:**
-> - **Managed Agents Preview:** Run `/managed-agents` to create a better agentic loop with a Manager-Executor relation and dramatically improved performance for fractions of the cost from running a larger model. Choose from 6 pre-built templates or build your own.`[EXPERIMENTAL]`
->
-> - Speech modes: Try `/rocky` and `/caveman` to hear the difference! `/normal` to go back.
->
-> - Multi-Provider Support is here! Run `/connect` to connect to the AI provider of your choice - Anthropic, OpenAI, Google, GitHub Copilot, Ollama, DeepSeek, Groq, Mistral, and [30+ more](#supported-providers).
+## Original Claurst README
+
+Claurst is an **open-source, multi-provider terminal coding agent** built from the ground up in Rust. It started as a clean-room reimplementation of Claude Code's behavior (from [spec](https://github.com/kuberwastaken/claurst/tree/main/spec)) and has since evolved into an amazing TUI pair programmer with multi-provider support, a rich UI, plugin system, a companion named Rustle, chat forking, memory consolidation, and much more.
+
+It's fast, it's memory-efficient, it's yours to run however you want, and there's no tracking or telemetry.
 
 ---
 
@@ -140,4 +136,3 @@ The process was explicitly two-phase:
 This mirrors the legal precedent established by Phoenix Technologies v. IBM (1984) — clean-room engineering of the BIOS — and the principle from Baker v. Selden (1879) that copyright protects expression, not ideas or behavior.
 
 ---
-
