@@ -31,25 +31,11 @@ It's fast, it's memory-efficient, it's yours to run however you want, and there'
 
 # Getting Started
 
-## Download a release binary
-
-Grab the latest binary for your platform from [**GitHub Releases**](https://github.com/kuberwastaken/claurst/releases):
-
-| Platform | Binary |
-|----------|--------|
-| **Windows** x86_64 | `claurst-windows-x86_64.zip` |
-| **Linux** x86_64 | `claurst-linux-x86_64.tar.gz` |
-| **Linux** aarch64 | `claurst-linux-aarch64.tar.gz` |
-| **macOS** Intel | `claurst-macos-x86_64.tar.gz` |
-| **macOS** Apple Silicon | `claurst-macos-aarch64.tar.gz` |
-
-### And you're done.
-
 ## Build from source
 
 ```bash
-git clone https://github.com/kuberwastaken/claurst.git
-cd claurst/src-rust
+git clone https://github.com/thamwangjun/clearest.git
+cd clearest/src-rust
 cargo build --release --package claurst
 
 # Binary is at target/release/claurst
