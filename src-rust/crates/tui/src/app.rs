@@ -2770,14 +2770,26 @@ impl App {
             match key.code {
                 KeyCode::Esc => {
                     self.onboarding_dialog.dismiss();
-                    // Persist completion so the dialog doesn't reappear on next launch.
-                    let _ = Self::persist_onboarding_complete();
+                    // Persist completion off the event loop so we don't block
+                    // the tokio thread during key handling.
+                    tokio::spawn(async {
+                        if let Ok(mut s) = claurst_core::config::Settings::load().await {
+                            s.has_completed_onboarding = true;
+                            let _ = s.save().await;
+                        }
+                    });
                 }
                 KeyCode::Enter | KeyCode::Right => {
                     if self.onboarding_dialog.next_page() {
                         self.onboarding_dialog.dismiss();
-                        // Persist that onboarding is complete (best-effort).
-                        let _ = Self::persist_onboarding_complete();
+                        // Persist completion off the event loop so we don't block
+                        // the tokio thread during key handling.
+                        tokio::spawn(async {
+                            if let Ok(mut s) = claurst_core::config::Settings::load().await {
+                                s.has_completed_onboarding = true;
+                                let _ = s.save().await;
+                            }
+                        });
                     }
                 }
                 KeyCode::Left => {
