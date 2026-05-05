@@ -207,15 +207,6 @@ fn render_provider_setup_page(frame: &mut Frame, area: Rect) {
             Span::styled(" dismiss · configure later with ", Style::default().fg(dim)),
             Span::styled("/providers", Style::default().fg(Color::Rgb(150, 150, 150))),
         ]),
-        Line::from(vec![Span::styled(
-            "  → 20+ more providers: claurst --help",
-            Style::default().fg(Color::DarkGray),
-        )]),
-        Line::from(""),
-        Line::from(vec![Span::styled(
-            "  Esc: dismiss  (you can configure later with /providers)",
-            Style::default().fg(Color::DarkGray).add_modifier(Modifier::ITALIC),
-        )]),
     ];
 
     Paragraph::new(lines)
