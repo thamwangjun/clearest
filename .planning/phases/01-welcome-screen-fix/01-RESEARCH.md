@@ -339,17 +339,19 @@ fn test_onboarding_esc_dismisses() {
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Is the bug observable today in the current HEAD?**
    - What we know: The `handle_key_event` code looks correct. `any_dialog_open` includes the dialog. The D-06 test doesn't exist yet to confirm.
    - What's unclear: Whether there's a runtime timing issue not visible in static analysis.
    - Recommendation: The D-06 regression tests should be written and run FIRST (Wave 0). If they pass, the bug was already fixed in 15758e3 and only the missing test remains. If they fail, a code fix is needed in `handle_key_event` or the main loop.
+   - RESOLVED: This will be determined at execution time. If the D-06 regression tests pass immediately after being added, the production code is already correct and only the test gap exists. If any test fails with `should_quit=true` or the wrong page, a production code fix is needed (see Task 2 contingency in 01-01-PLAN.md).
 
 2. **Should the bypass_permissions/onboarding ordering be made safe with a combined guard?**
    - What we know: For normal users, `bypass_permissions_dialog.visible = false`, making the ordering safe. The issue is latent.
    - What's unclear: Whether any code path could set both dialogs visible simultaneously.
    - Recommendation: Per D-03, add a defensive comment at the bypass_permissions guard noting the ordering dependency. No code change needed.
+   - RESOLVED: No code change needed per D-03 (locked decision). The ordering risk is latent and does not affect normal first-run users. The D-06 tests verify `should_quit=false` for the standard path and serve as a sufficient regression guard.
 
 ---
 
