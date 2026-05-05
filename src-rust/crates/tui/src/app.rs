@@ -5601,6 +5601,7 @@ impl App {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::onboarding_dialog::OnboardingPage;
     use crossterm::event::{KeyCode, KeyEvent, KeyEventKind, KeyEventState, KeyModifiers};
 
     fn make_app() -> App {
@@ -5914,5 +5915,49 @@ mod tests {
 
         assert!(app.permission_request.is_none());
         assert!(!app.bash_command_allowed_by_prefix("npm test"));
+    }
+
+    #[test]
+    fn test_onboarding_enter_on_welcome_advances_page() {
+        let mut app = make_app();
+        app.onboarding_dialog.show();
+        assert!(app.onboarding_dialog.visible);
+        assert_eq!(app.onboarding_dialog.page, OnboardingPage::Welcome);
+
+        let result = app.handle_key_event(press_key(KeyCode::Enter, KeyModifiers::NONE));
+
+        assert!(!app.should_quit, "should_quit must remain false after Enter on Welcome");
+        assert!(!result, "handle_key_event must return false while dialog is visible");
+        assert_eq!(
+            app.onboarding_dialog.page,
+            OnboardingPage::KeyBindings,
+            "page must advance Welcome -> KeyBindings"
+        );
+        assert!(app.onboarding_dialog.visible, "dialog must remain visible");
+    }
+
+    #[test]
+    fn test_onboarding_enter_on_keybindings_dismisses() {
+        let mut app = make_app();
+        app.onboarding_dialog.show();
+        app.onboarding_dialog.page = OnboardingPage::KeyBindings;
+
+        let result = app.handle_key_event(press_key(KeyCode::Enter, KeyModifiers::NONE));
+
+        assert!(!app.should_quit, "should_quit must remain false after Enter on KeyBindings");
+        assert!(!result, "handle_key_event must return false");
+        assert!(!app.onboarding_dialog.visible, "dialog must be dismissed");
+    }
+
+    #[test]
+    fn test_onboarding_esc_dismisses() {
+        let mut app = make_app();
+        app.onboarding_dialog.show();
+
+        let result = app.handle_key_event(press_key(KeyCode::Esc, KeyModifiers::NONE));
+
+        assert!(!app.should_quit);
+        assert!(!result);
+        assert!(!app.onboarding_dialog.visible);
     }
 }
